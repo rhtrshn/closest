@@ -1,0 +1,30 @@
+﻿
+<script type="text/javascript">
+    $("#form1").submit(function () {
+        var jqxhr = $.post('api/closest/result', $('#form1').serialize())
+            .success(function () {
+                var loc = jqxhr.getResponseHeader('Location');
+                var a = $('<a/>', { href: loc, text: loc });
+                $('#message').html(a);
+            })
+            .error(function () {
+                $('#message').html("Error posting the update.");
+            });
+        return false;
+    });
+</script>
+    
+    
+<form id="form1" method="post" action="api/closest/result"
+      enctype="application/x-www-form-urlencoded">
+    <div>
+        <label for="Address">Address</label>
+    </div>
+    <div>
+        <input name="Address" type="text" />
+    </div>
+    
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>
